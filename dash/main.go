@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"time"
+
 	"github.com/caarlos0/env/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -9,8 +12,6 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"github.com/joho/godotenv"
-	"os"
-	"time"
 )
 
 type Config struct {
@@ -47,7 +48,6 @@ func main() {
 	defer func(file *os.File) {
 		err := file.Close()
 		if err != nil {
-
 		}
 	}(file)
 	app.Use(requestid.New())
