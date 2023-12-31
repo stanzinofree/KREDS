@@ -1,7 +1,5 @@
 Dockerfile
 .deepsource.toml
 README.md
-.env
-/logs/*.log
-/reports/*.html
-/dash/.env
+.env.example
+.gitkeep

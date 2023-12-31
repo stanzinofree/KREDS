@@ -3,3 +3,5 @@
 /utils/COPYRIGHT.txt
 /utils/LICENSE.txt
 /dash/.env
+/logs/*.log
+/reports/*.html
