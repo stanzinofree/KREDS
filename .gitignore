@@ -1,1 +1,5 @@
 .idea
+/utils/GeoLite2-Country.mmdb
+/utils/COPYRIGHT.txt
+/utils/LICENSE.txt
+/dash/.env

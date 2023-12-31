@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+
+  dash:
+    restart: always
+    image: dash:latest
+    container_name: 'dash'
+    volumes:
+      - ./logs:/logs/
+      - ./dash/template/dist:/public/
+      - ./reports:/public/reports/:ro
+    build:
+      context: ./dash
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 9080:8080
+    networks:
+      - kreds
+    labels:
+      io.portainer.accesscontrol.teams: dev,prod
+
+  goaccess:
+    restart: always
+    image: allinurl/goaccess
+    container_name: 'goaccess'
+    volumes:
+      - ./logs:/logs:ro
+      - ./reports:/reports/
+      - ./config/goaccess.conf:/etc/goaccess/goaccess.conf
+      - ./utils:/geodb/
+      - goaccess-tmp:/tmp
+    ports:
+      - 7890:7890
+    networks:
+      - kreds
+    command: /logs/dash.log -e LANG='en_US.UTF-8' -o /reports/dash.html --log-format='%d:%t | %s | %D | ~h{, } | %D | %U'  --real-time-html
+    labels:
+      io.portainer.accesscontrol.teams: dev,prod
+
+networks:
+  kreds:
+
+volumes:
+  goaccess-tmp:
